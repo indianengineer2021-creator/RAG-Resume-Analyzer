@@ -54,7 +54,7 @@ def test_answer_question_uses_resume_context(monkeypatch):
     ]))
     monkeypatch.setattr("src.rag_pipeline.__import__", lambda *args, **kwargs: type("Mod", (), {"get_llm": lambda: FakeLLM()})())
 
-    answer = answer_question("Do I have Python experience?", vector_store=FakeVectorStore([
+    answer = answer_question("Do I have Python_experience?", vector_store=FakeVectorStore([
         Document(page_content="Python and SQL experience for 5 years", metadata={"source": "example.pdf"}),
     ]), k=1)
 
