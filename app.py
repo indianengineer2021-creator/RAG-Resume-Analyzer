@@ -94,8 +94,7 @@ with st.container():
 
                 status.update(label="Generating embeddings and storing resume context...", state="running")
                 clear_vector_store()
-                vector_store = get_cached_vector_store()
-                add_documents(chunks)
+                vector_store = add_documents(chunks)
 
                 status.update(label="Searching relevant resume information...", state="running")
                 relevant_chunks = vector_store.similarity_search(clean_jd_text(jd_text), k=retrieval_count)
@@ -119,7 +118,7 @@ with st.container():
         st.markdown("---")
         st.subheader("Overall Match")
         st.metric(label="Match Score", value=f"{overall_score} / 100")
-        st.progress(min_value=0, max_value=100, value=overall_score)
+        st.progress(max(0, min(100, overall_score)))
 
         st.subheader("Executive Summary")
         st.write(result.get("summary", "No summary available."))

@@ -8,7 +8,7 @@ from src.config import GEMINI_MODEL
 logger = logging.getLogger(__name__)
 
 
-def get_llm(model_name: str | None = None, temperature: float = 0.2, max_output_tokens: int = 1024):
+def get_llm(model_name: str | None = None, temperature: float = 0.2, max_output_tokens: int = 4096):
     """Initialize the Gemini model for grounded resume evaluation."""
     selected_model = model_name or os.getenv("GEMINI_MODEL", GEMINI_MODEL)
     logger.info("Initializing Gemini model: %s", selected_model)

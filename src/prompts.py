@@ -57,8 +57,9 @@ Requirements:
 
 
 def build_resume_analysis_prompt(job_description: str, context: str) -> str:
-    """Create the final prompt sent to Gemini for grounded evaluation."""
-    return RESUME_ANALYSIS_PROMPT.format(job_description=job_description, context=context)
+  """Create the final prompt sent to Gemini for grounded evaluation."""
+  prompt = RESUME_ANALYSIS_PROMPT.replace("{job_description}", job_description)
+  return prompt.replace("{context}", context)
 
 
 def build_follow_up_prompt(question: str, context: str) -> str:

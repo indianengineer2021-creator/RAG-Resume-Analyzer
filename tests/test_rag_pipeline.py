@@ -2,7 +2,7 @@ from typing import List
 
 from langchain_core.documents import Document
 
-from src.rag_pipeline import answer_question
+from src.rag_pipeline import _safe_json_loads, answer_question
 from src.retriever import retrieve_relevant_documents
 
 
@@ -20,6 +20,13 @@ class FakeVectorStore:
 
     def as_retriever(self, search_kwargs=None):
         return FakeRetriever(self.items)
+
+
+def test_safe_json_loads_parses_complete_analysis():
+    analysis = _safe_json_loads('{"overall_score": 50, "summary": "Good match", "skill_match": []}')
+
+    assert analysis["overall_score"] == 50
+    assert analysis["summary"] == "Good match"
 
 
 def test_retrieve_relevant_documents_returns_content():

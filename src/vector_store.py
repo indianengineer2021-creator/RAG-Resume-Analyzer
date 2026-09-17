@@ -25,11 +25,11 @@ def create_vector_store(collection_name: str = RESUME_COLLECTION_NAME, persist_d
 
 
 def add_documents(documents: Iterable[Document], collection_name: str = RESUME_COLLECTION_NAME):
-    """Add documents to the ChromaDB collection and persist them to disk."""
+    """Add documents to the persistent ChromaDB collection."""
     vector_store = create_vector_store(collection_name=collection_name)
-    vector_store.add_documents(list(documents))
-    vector_store.persist()
-    logger.info("Added %s documents to ChromaDB collection %s", len(list(documents)), collection_name)
+    document_list = list(documents)
+    vector_store.add_documents(document_list)
+    logger.info("Added %s documents to ChromaDB collection %s", len(document_list), collection_name)
     return vector_store
 
 
